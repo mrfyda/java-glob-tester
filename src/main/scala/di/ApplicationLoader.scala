@@ -1,6 +1,6 @@
 package di
 
-import _root_.controllers.HomeController
+import _root_.controllers.{AssetsComponents, HomeController}
 import play.api.ApplicationLoader.Context
 import play.api.mvc.EssentialFilter
 import play.api.routing.Router
@@ -17,10 +17,14 @@ class ApplicationLoader extends play.api.ApplicationLoader {
 }
 
 class ApplicationComponents(context: Context)
-  extends BuiltInComponentsFromContext(context) {
+  extends BuiltInComponentsFromContext(context)
+    with AssetsComponents {
   lazy val router: Router = Router.from {
-    case GET(p"/") => new HomeController(controllerComponents).index()
-    case POST(p"/") => new HomeController(controllerComponents).test()
+    case GET(p"/api/v1") => new HomeController(controllerComponents).index()
+    case POST(p"/api/v1") => new HomeController(controllerComponents).test()
+
+    case GET(p"/") => assets.at("index.html")
+    case GET(p"$file*") => assets.at(file)
   }
 
   override def httpFilters: Seq[EssentialFilter] = Seq.empty

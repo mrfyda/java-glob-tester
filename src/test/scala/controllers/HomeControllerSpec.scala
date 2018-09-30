@@ -19,7 +19,7 @@ class HomeControllerSpec extends PlaySpec with OneAppPerTestWithComponents {
 
     "render the page from a new instance of controller" in {
       val controller = new HomeController(stubControllerComponents())
-      val home = controller.index().apply(FakeRequest(GET, "/"))
+      val home = controller.index().apply(FakeRequest(GET, "/api/v1"))
 
       status(home) mustBe OK
       contentType(home) mustBe Some("text/plain")
@@ -27,7 +27,7 @@ class HomeControllerSpec extends PlaySpec with OneAppPerTestWithComponents {
     }
 
     "render the page from the router" in {
-      val request = FakeRequest(GET, "/")
+      val request = FakeRequest(GET, "/api/v1")
       val home = route(app, request).get
 
       status(home) mustBe OK
@@ -41,7 +41,7 @@ class HomeControllerSpec extends PlaySpec with OneAppPerTestWithComponents {
     "render the page from a new instance of controller" in {
       val controller = new HomeController(stubControllerComponents())
       val home = controller.test().apply(
-        FakeRequest(POST, "/")
+        FakeRequest(POST, "/api/v1")
           .withBody(Json.toJson(GlobTestRequest("/app/**", "/app/Controller.scala")))
       )
 
@@ -51,7 +51,7 @@ class HomeControllerSpec extends PlaySpec with OneAppPerTestWithComponents {
     }
 
     "render the page from the router" in {
-      val request = FakeRequest(POST, "/")
+      val request = FakeRequest(POST, "/api/v1")
         .withBody(Json.toJson(GlobTestRequest("/app/**", "/app/Controller.scala")))
       val home = route(app, request).get
 
