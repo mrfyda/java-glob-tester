@@ -20,6 +20,7 @@ class ApplicationComponents(context: Context)
   extends BuiltInComponentsFromContext(context)
     with AssetsComponents {
   lazy val router: Router = Router.from {
+    case OPTIONS(p"/api/v1") => new HomeController(controllerComponents).index()
     case GET(p"/api/v1") => new HomeController(controllerComponents).index()
     case POST(p"/api/v1") => new HomeController(controllerComponents).test()
 

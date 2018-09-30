@@ -17,6 +17,8 @@ class HomeController(cc: ControllerComponents) extends AbstractController(cc) {
 
   def index() = Action {
     Ok("java-glob-tester")
+      .withHeaders(ACCESS_CONTROL_ALLOW_ORIGIN -> "http://localhost:8080")
+      .withHeaders(ACCESS_CONTROL_ALLOW_HEADERS -> CONTENT_TYPE)
   }
 
   def test(): Action[JsValue] = Action(parse.json) { request =>
@@ -27,6 +29,8 @@ class HomeController(cc: ControllerComponents) extends AbstractController(cc) {
         val matcher = fs.getPathMatcher(s"glob:$pattern")
         val result = matcher.matches(fs.getPath(path))
         Ok(Json.toJson(result))
+          .withHeaders(ACCESS_CONTROL_ALLOW_ORIGIN -> "http://localhost:8080")
+          .withHeaders(ACCESS_CONTROL_ALLOW_HEADERS -> CONTENT_TYPE)
     }
   }
 
