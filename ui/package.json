@@ -2,20 +2,36 @@
   "name": "ui",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "1.1.5"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "rimraf ../src/main/resources/public && react-scripts build && ncp build ../src/main/resources/public && rimraf build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "serve": "vue-cli-service serve",
+    "build": "rimraf ../src/main/resources/public && vue-cli-service build && ncp dist ../src/main/resources/public && rimraf dist",
+    "lint": "vue-cli-service lint",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vue-class-component": "^6.0.0",
+    "vue-property-decorator": "^7.0.0",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^23.1.4",
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-plugin-e2e-cypress": "^3.0.4",
+    "@vue/cli-plugin-typescript": "^3.0.4",
+    "@vue/cli-plugin-unit-jest": "^3.0.4",
+    "@vue/cli-service": "^3.0.4",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
     "ncp": "^2.0.0",
-    "rimraf": "^2.6.2"
+    "node-sass": "^4.9.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.0.1",
+    "ts-jest": "^23.0.0",
+    "typescript": "^3.0.0",
+    "vue-template-compiler": "^2.5.17"
   },
   "proxy": "http://localhost:9000"
 }
